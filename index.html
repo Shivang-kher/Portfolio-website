@@ -1,71 +1,540 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shivang</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-  <link rel="StyleSheet" href="css/styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shivang Kher — Software Engineer</title>
+  <meta name="description" content="Software engineer shipping fintech platform features at AssetPlus — onboarding flows, integrations and dashboards used by thousands of MFD partners.">
+  <meta property="og:title" content="Shivang Kher — Software Engineer">
+  <meta property="og:description" content="Software engineer shipping fintech platform features at AssetPlus.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://shivangkher.netlify.app">
   <link rel="icon" href="man.ico">
-  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Fredoka+One&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">  
-  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; }
+    ::selection { background: #d4a85445; }
+    ::-webkit-scrollbar { width: 11px; }
+    ::-webkit-scrollbar-track { background: #18140e; }
+    ::-webkit-scrollbar-thumb { background: #3a3228; border-radius: 6px; border: 3px solid #18140e; }
+
+    :root {
+      /* hex fallbacks for older Safari */
+      --bg:       #1e1810;
+      --surface:  #252118;
+      --surface2: #2e2920;
+      --fg:       #f2ede6;
+      --muted:    #b8ad9e;
+      --faint:    #7d7268;
+      --line:     #3a3228;
+      --accent:   #d4a854;
+      --accent-dim: #8c6e38;
+    }
+    /* Richer oklch values for modern browsers */
+    @supports (color: oklch(0 0 0)) {
+      :root {
+        --bg:       oklch(0.18 0.012 55);
+        --surface:  oklch(0.215 0.013 52);
+        --surface2: oklch(0.26 0.014 52);
+        --fg:       oklch(0.95 0.008 80);
+        --muted:    oklch(0.74 0.014 75);
+        --faint:    oklch(0.55 0.012 65);
+        --line:     oklch(0.31 0.012 55);
+        --accent:   oklch(0.82 0.12 62);
+        --accent-dim: oklch(0.62 0.09 60);
+      }
+    }
+
+    @keyframes enterUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+    @keyframes pulse   { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.35; transform:scale(.6); } }
+    @keyframes floaty  { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
+    @keyframes toastIn { from { opacity:0; transform:translateX(-50%) translateY(14px); } to { opacity:1; transform:translateX(-50%) translateY(0); } }
+    @keyframes revealUp { from { opacity:0; transform:translateY(34px); } to { opacity:1; transform:none; } }
+
+    [data-enter] { animation: enterUp 0.85s cubic-bezier(0.2,0.85,0.25,1) both; }
+
+    @supports (animation-timeline: view()) {
+      [data-reveal] { animation: revealUp both; animation-timeline: view(); animation-range: entry 2% cover 30%; }
+    }
+    /* Fallback for older browsers */
+    @supports not (animation-timeline: view()) {
+      [data-reveal] { opacity: 0; transform: translateY(34px); transition: opacity .8s cubic-bezier(0.2,.85,.25,1), transform .8s cubic-bezier(0.2,.85,.25,1); }
+      [data-reveal].revealed { opacity: 1; transform: none; }
+    }
+
+    .pulse  { animation: pulse  1.8s ease-in-out infinite; }
+    .floaty { animation: floaty 5s   ease-in-out infinite; }
+
+    /* Hover states */
+    .nav-link  { transition: color .2s, background .2s; }
+    .nav-link:hover  { color: var(--fg) !important; background: var(--surface) !important; }
+    .nav-cta   { transition: transform .2s, filter .2s; }
+    .nav-cta:hover   { transform: translateY(-1px); filter: brightness(1.06); }
+
+    .btn-accent  { transition: transform .2s, filter .2s; }
+    .btn-accent:hover  { transform: translateY(-2px); filter: brightness(1.06); }
+    .btn-outline { transition: transform .2s, border-color .2s, background .2s; }
+    .btn-outline:hover { transform: translateY(-2px); border-color: var(--accent-dim) !important; background: var(--surface2) !important; }
+
+    .chip { transition: border-color .2s, transform .2s; cursor: default; }
+    .chip:hover { border-color: var(--accent-dim) !important; transform: translateY(-2px); }
+
+    .project-card { transition: transform .25s, border-color .25s, background .25s; }
+    .project-card:hover { transform: translateY(-4px); border-color: var(--accent-dim) !important; background: var(--surface2) !important; }
+
+    .footer-link { transition: color .2s; }
+    .footer-link:hover { color: var(--accent) !important; }
+
+    /* Toast — class-driven animation so it re-triggers on each show */
+    #toast { display: none; position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 100;
+             align-items: center; gap: 9px; padding: 12px 20px; border-radius: 100px;
+             background: var(--accent); color: #221a0c;
+             font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600;
+             box-shadow: 0 16px 40px rgba(0,0,0,.45); white-space: nowrap; }
+    #toast.show { display: flex; animation: toastIn .3s ease both; }
+
+    /* Mobile nav */
+    #menu-btn { display: none; background: none; border: 1px solid var(--line); border-radius: 8px;
+                padding: 8px 10px; cursor: pointer; color: var(--muted); font-size: 18px; line-height: 1; }
+    #mobile-menu { display: none; position: fixed; inset: 0; top: 57px; z-index: 50;
+                   background: var(--bg); border-top: 1px solid var(--line);
+                   flex-direction: column; padding: 24px 32px; gap: 4px;
+                   font-family: 'JetBrains Mono', monospace; font-size: 15px; }
+    #mobile-menu a { text-decoration: none; color: var(--muted); padding: 12px 0;
+                     border-bottom: 1px solid var(--line); }
+    #mobile-menu a:last-child { border-bottom: none; color: #221a0c; background: var(--accent);
+                                 padding: 12px 16px; border-radius: 8px; font-weight: 600; text-align: center; }
+    #mobile-menu.open { display: flex; }
+
+    /* Skip link for keyboard users */
+    .skip-link { position: absolute; top: -999px; left: 8px; z-index: 200;
+                 background: var(--accent); color: #221a0c; padding: 8px 16px;
+                 border-radius: 0 0 8px 8px; font-family: 'JetBrains Mono', monospace;
+                 font-size: 13px; font-weight: 600; text-decoration: none; }
+    .skip-link:focus { top: 0; }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .desktop-nav { display: none !important; }
+      #menu-btn    { display: block !important; }
+      .hero-grid   { grid-template-columns: 1fr !important; }
+      .hero-photo  { display: none !important; }
+      .metric-strip{ grid-template-columns: 1fr 1fr !important; }
+      .two-col     { grid-template-columns: 1fr !important; }
+      .skills-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
 </head>
-<body>
-  <div class="head">
-    <img src="CSS - My Site Images/code.png" alt="cloud image" class="p1">
-    <h1>I'm Shivang Kher</h1>
-    <h2 class="gamer">CSE STUDENT AT VIT VELLORE</h2>
-    <img src="CSS - My Site Images/code.png" alt="cloud image" class="p2"><br>
-    <img src="CSS - My Site Images/settings.png" alt="mountain image" class="p3">
-  </div>
-  <div class="middle-container">
-    <div class="profile">
-      <img src="CSS - My Site Images/me.png" alt="me" class="me">
-      <h2>Hello.</h2>
-      <p class="desc">I am currently an undergraduate student pursuing my bachelor's in Computer science and engineering with specialization in bioinformatics at VIT Vellore.</p>
-    </div>
-    <br>
-    <hr>
-    <div class="skills">
-      <h2>My Skills.</h2>
-      <div class="skill-row1">
-        <img src="CSS - My Site Images/ux.png" class="ux" alt="logo">
-        <h3>DESIGN</h3></p>
-        <p>I have gained experience in ADOBE PHOTOSHOP and ADOBE ILLUSTRATOR by designing posters and vector art</p>
-      </div><br>  
-      <div class="skill-row2">
-        <img src="CSS - My Site Images/linux.png" alt="linux" class="linux">
-        <h3>LINUX</h3>
-        <p>Experienced in Linux terminal commands and frameworks such as metasploit, BeeF, bettercap, Veil, airmon, etc.</p>
+<body style="background:var(--bg); color:var(--fg); font-family:'Hanken Grotesk',system-ui,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; min-height:100vh;">
+
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <!-- NAV -->
+  <nav aria-label="Site navigation" style="position:sticky; top:0; z-index:60; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); background:color-mix(in srgb, #18140e 72%, transparent); border-bottom:1px solid var(--line);">
+    <div style="max-width:1120px; margin:0 auto; padding:16px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+      <a href="#top" style="display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--fg);">
+        <span style="display:grid; place-items:center; width:32px; height:32px; border-radius:9px; background:var(--accent); color:#221a0c; font-weight:800; font-size:14px; letter-spacing:-0.02em;">SK</span>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:0.04em; color:var(--muted);">shivang_kher</span>
+      </a>
+      <div class="desktop-nav" style="display:flex; align-items:center; gap:4px; font-family:'JetBrains Mono',monospace; font-size:12.5px;">
+        <a href="#work"     class="nav-link" style="text-decoration:none; color:var(--muted); padding:8px 14px; border-radius:8px;">work</a>
+        <a href="#projects" class="nav-link" style="text-decoration:none; color:var(--muted); padding:8px 14px; border-radius:8px;">projects</a>
+        <a href="#skills"   class="nav-link" style="text-decoration:none; color:var(--muted); padding:8px 14px; border-radius:8px;">skills</a>
+        <a href="#contact"  class="nav-cta"  style="text-decoration:none; color:#221a0c; background:var(--accent); padding:8px 16px; border-radius:8px; font-weight:600;">contact</a>
       </div>
-      <br>
+      <button id="menu-btn" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">&#9776;</button>
     </div>
-    <br>
-    <hr>
-    <br>
-    <div class="contact-me">
-      <img class="con" src="CSS - My Site Images/contact.png" alt="contact">
-      <h2>Get In Touch</h2>
-      <p>if you want to get to know me, feel free to contact me</p>
-      <a class="btn" href="mailto:shivangkher@gmail.com">CONTACT ME</a>
-    </div>
-    <br>
-  </div>
-  
-  
-  <div class="bottom-container">
-    <a class="footer-link" href="https://www.linkedin.com/in/shivang-kher-746761218/">LinkedIn</a>
-    <a class="footer-link" href="https://twitter.com/Shivang_kher">Twitter</a>
-    <br><br>
-    <p class="cop">© 2021 Shivang kher.</p>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" role="dialog" aria-label="Navigation menu">
+    <a href="#work"     onclick="closeMenu()">work</a>
+    <a href="#projects" onclick="closeMenu()">projects</a>
+    <a href="#skills"   onclick="closeMenu()">skills</a>
+    <a href="#contact"  onclick="closeMenu()">contact</a>
   </div>
 
+  <main id="main-content">
+
+    <!-- HERO -->
+    <header id="top" style="max-width:1120px; margin:0 auto; padding:96px 32px 88px; scroll-margin-top:80px;">
+      <div class="hero-grid" style="display:grid; grid-template-columns:1.4fr 0.9fr; gap:64px; align-items:center;">
+        <div>
+          <div data-enter style="animation-delay:0.05s; display:inline-flex; align-items:center; gap:10px; padding:7px 14px; border:1px solid var(--line); border-radius:100px; background:var(--surface); margin-bottom:28px;">
+            <span class="pulse" aria-hidden="true" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--accent);"></span>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted); letter-spacing:0.02em;">Building partner growth at AssetPlus</span>
+          </div>
+          <h1 data-enter style="animation-delay:0.12s; margin:0; font-size:clamp(48px,7vw,88px); line-height:0.98; font-weight:800; letter-spacing:-0.035em;">
+            Shivang<br>Kher<span style="color:var(--accent);" aria-hidden="true">.</span>
+          </h1>
+          <p data-enter style="animation-delay:0.2s; margin:28px 0 0; max-width:520px; font-size:19px; line-height:1.6; color:var(--muted);">
+            Software engineer shipping fintech platform features that move real numbers — onboarding flows, integrations and dashboards used by <strong style="color:var(--fg); font-weight:600;">thousands of partners</strong>.
+          </p>
+          <div data-enter style="animation-delay:0.28s; display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:34px;">
+            <button type="button" onclick="copyEmail()" class="btn-accent" style="display:inline-flex; align-items:center; gap:9px; padding:12px 18px; border-radius:11px; border:none; background:var(--accent); color:#221a0c; font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:600; cursor:pointer;" aria-label="Copy email address to clipboard">
+              <span aria-hidden="true">✦</span> shivangkher@gmail.com
+            </button>
+            <a href="https://linkedin.com/in/shivang-kher-746761218" target="_blank" rel="noopener noreferrer" class="btn-outline" aria-label="LinkedIn profile (opens in new tab)" style="display:inline-flex; align-items:center; gap:8px; padding:12px 18px; border-radius:11px; border:1px solid var(--line); background:var(--surface); color:var(--fg); text-decoration:none; font-family:'JetBrains Mono',monospace; font-size:13px;">LinkedIn ↗</a>
+            <a href="https://github.com/Shivang-Kher" target="_blank" rel="noopener noreferrer" class="btn-outline" aria-label="GitHub profile (opens in new tab)" style="display:inline-flex; align-items:center; gap:8px; padding:12px 18px; border-radius:11px; border:1px solid var(--line); background:var(--surface); color:var(--fg); text-decoration:none; font-family:'JetBrains Mono',monospace; font-size:13px;">GitHub ↗</a>
+          </div>
+          <div data-enter style="animation-delay:0.36s; margin-top:30px; display:flex; align-items:center; gap:18px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--faint); letter-spacing:0.04em;">
+            <span style="display:inline-flex; align-items:center; gap:7px;">
+              <span class="pulse" aria-hidden="true" style="display:inline-block; width:5px; height:5px; border-radius:50%; background:var(--accent);"></span>Chennai, IN
+            </span>
+            <span style="display:inline-flex; align-items:center; gap:18px;">
+              <span aria-hidden="true" style="display:inline-block; width:1px; height:13px; background:var(--line);"></span>
+              <span><span id="clock" aria-label="Current time in IST" aria-live="polite"></span> IST</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="hero-photo" data-enter style="animation-delay:0.24s; display:flex; justify-content:center;" aria-hidden="true">
+          <div style="position:relative;">
+            <div style="position:absolute; inset:-14px; border-radius:28px; border:1px solid var(--line);"></div>
+            <div class="floaty" style="position:absolute; top:-26px; right:-26px; width:64px; height:64px; border-radius:50%; background:var(--accent); opacity:0.16; filter:blur(8px);"></div>
+            <!-- Replace this placeholder with: <img src="your-photo.jpg" alt="Shivang Kher" style="width:300px;height:360px;border-radius:22px;object-fit:cover;"> -->
+            <div style="width:300px; height:360px; border:1px solid var(--line); border-radius:22px; overflow:hidden; background:var(--surface); display:flex; align-items:center; justify-content:center; position:relative; z-index:1;">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--faint); text-align:center; padding:16px;">add your<br>photo here</span>
+            </div>
+            <div style="position:absolute; bottom:-16px; left:-16px; z-index:2; padding:8px 13px; border-radius:10px; background:var(--surface2); border:1px solid var(--line); font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); box-shadow:0 12px 30px rgba(0,0,0,0.4);">est. VIT '24</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- METRIC STRIP -->
+      <div class="metric-strip" data-enter style="animation-delay:0.44s; display:grid; grid-template-columns:repeat(4,1fr); gap:24px; margin-top:84px; padding-top:38px; border-top:1px solid var(--line);">
+        <div>
+          <div style="font-size:34px; font-weight:800; letter-spacing:-0.02em;">1,000<span style="color:var(--accent);">+</span></div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--faint); margin-top:6px; letter-spacing:0.04em;">partners on integrations</div>
+        </div>
+        <div>
+          <div style="font-size:34px; font-weight:800; letter-spacing:-0.02em;">30<span style="color:var(--accent);">%</span></div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--faint); margin-top:6px; letter-spacing:0.04em;">lift in activation</div>
+        </div>
+        <div>
+          <div style="font-size:34px; font-weight:800; letter-spacing:-0.02em;">300<span style="color:var(--accent);">+</span></div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--faint); margin-top:6px; letter-spacing:0.04em;">demos booked / month</div>
+        </div>
+        <div>
+          <div style="font-size:34px; font-weight:800; letter-spacing:-0.02em;">14</div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--faint); margin-top:6px; letter-spacing:0.04em;">languages shipped</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- EXPERIENCE -->
+    <section id="work" data-reveal style="max-width:1120px; margin:0 auto; padding:80px 32px; scroll-margin-top:72px;">
+      <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:56px;">
+        <span aria-hidden="true" style="font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--accent); letter-spacing:0.06em;">01</span>
+        <h2 style="margin:0; font-size:30px; font-weight:700; letter-spacing:-0.02em;">Experience</h2>
+        <span aria-hidden="true" style="flex:1; height:1px; background:var(--line); display:inline-block;"></span>
+      </div>
+
+      <div style="display:flex; flex-direction:column;">
+        <!-- AssetPlus -->
+        <article style="padding:36px 0; border-top:1px solid var(--line);">
+          <div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:8px;">
+            <div>
+              <h3 style="margin:0; font-size:22px; font-weight:700;">Software Engineer</h3>
+              <div style="margin-top:4px; color:var(--accent); font-weight:600; font-size:15px;">AssetPlus</div>
+            </div>
+            <div style="display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted);">
+              <span class="pulse" aria-hidden="true" style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>May 2025 — Present
+            </div>
+          </div>
+          <ul style="list-style:none; margin:18px 0 0; padding:0; display:flex; flex-direction:column; gap:13px; max-width:760px;">
+            <li style="display:flex; gap:14px; color:var(--muted); font-size:15.5px; line-height:1.55;"><span aria-hidden="true" style="display:inline-block; margin-top:11px; width:14px; height:1.5px; background:var(--accent-dim); flex:none;"></span><span>Re-architected CleverTap event tracking across iOS &amp; Android for reliable push analytics and accurate attribution across <strong style="color:var(--fg); font-weight:600;">1,000+ partners</strong>.</span></li>
+            <li style="display:flex; gap:14px; color:var(--muted); font-size:15.5px; line-height:1.55;"><span aria-hidden="true" style="display:inline-block; margin-top:11px; width:14px; height:1.5px; background:var(--accent-dim); flex:none;"></span><span>Shipped "Schedule a Demo", letting MFD partners book RM walkthroughs — driving <strong style="color:var(--fg); font-weight:600;">300+ bookings / month</strong>.</span></li>
+            <li style="display:flex; gap:14px; color:var(--muted); font-size:15.5px; line-height:1.55;"><span aria-hidden="true" style="display:inline-block; margin-top:11px; width:14px; height:1.5px; background:var(--accent-dim); flex:none;"></span><span>Built ZeroBoard, a cross-platform onboarding checklist that raised partner activation by <strong style="color:var(--fg); font-weight:600;">30%</strong>.</span></li>
+            <li style="display:flex; gap:14px; color:var(--muted); font-size:15.5px; line-height:1.55;"><span aria-hidden="true" style="display:inline-block; margin-top:11px; width:14px; height:1.5px; background:var(--accent-dim); flex:none;"></span><span>Leading the Empanelment Revamp — redesigning onboarding, verification &amp; compliance flows for <strong style="color:var(--fg); font-weight:600;">400+ partners / month</strong>.</span></li>
+          </ul>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:22px;">
+            <span class="chip" style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:5px 11px; border:1px solid var(--line); border-radius:100px;">CleverTap</span>
+            <span class="chip" style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:5px 11px; border:1px solid var(--line); border-radius:100px;">iOS · Android</span>
+            <span class="chip" style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:5px 11px; border:1px solid var(--line); border-radius:100px;">Onboarding</span>
+            <span class="chip" style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:5px 11px; border:1px solid var(--line); border-radius:100px;">Activation</span>
+          </div>
+        </article>
+
+        <!-- Chola full-time -->
+        <article style="padding:36px 0; border-top:1px solid var(--line);">
+          <div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:8px;">
+            <div>
+              <h3 style="margin:0; font-size:22px; font-weight:700;">Software Engineer — IT &amp; Digital Innovation</h3>
+              <div style="margin-top:4px; color:var(--accent); font-weight:600; font-size:15px;">Chola Finance</div>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted);">Aug 2024 — Apr 2025</div>
+          </div>
+          <ul style="list-style:none; margin:18px 0 0; padding:0; display:flex; flex-direction:column; gap:13px; max-width:760px;">
+            <li style="display:flex; gap:14px; color:var(--muted); font-size:15.5px; line-height:1.55;"><span aria-hidden="true" style="display:inline-block; margin-top:11px; width:14px; height:1.5px; background:var(--accent-dim); flex:none;"></span><span><strong style="color:var(--fg); font-weight:600;">Productivity Report Module</strong> — Node/Express APIs + React dashboard tracking credit-team case count, idle &amp; active time for real-time performance insight.</span></li>
+            <li style="display:flex; gap:14px; color:var(--muted); font-size:15.5px; line-height:1.55;"><span aria-hidden="true" style="display:inline-block; margin-top:11px; width:14px; height:1.5px; background:var(--accent-dim); flex:none;"></span><span><strong style="color:var(--fg); font-weight:600;">Automated Case Reporting</strong> — OCR extraction from post-disbursement docs (RC, invoices, insurance) plus audit &amp; stage APIs for fast-track cases.</span></li>
+            <li style="display:flex; gap:14px; color:var(--muted); font-size:15.5px; line-height:1.55;"><span aria-hidden="true" style="display:inline-block; margin-top:11px; width:14px; height:1.5px; background:var(--accent-dim); flex:none;"></span><span><strong style="color:var(--fg); font-weight:600;">Capacity Planning Dashboard</strong> — multi-level analytics with drill-down into stage-wise case details for smarter workload distribution.</span></li>
+            <li style="display:flex; gap:14px; color:var(--muted); font-size:15.5px; line-height:1.55;"><span aria-hidden="true" style="display:inline-block; margin-top:11px; width:14px; height:1.5px; background:var(--accent-dim); flex:none;"></span><span><strong style="color:var(--fg); font-weight:600;">Multilingual KFS</strong> — JSON-driven Key Fact Statements rendered dynamically in <strong style="color:var(--fg); font-weight:600;">14 languages</strong>.</span></li>
+          </ul>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:22px;">
+            <span class="chip" style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:5px 11px; border:1px solid var(--line); border-radius:100px;">Node.js · Express</span>
+            <span class="chip" style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:5px 11px; border:1px solid var(--line); border-radius:100px;">React</span>
+            <span class="chip" style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:5px 11px; border:1px solid var(--line); border-radius:100px;">OCR</span>
+            <span class="chip" style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:5px 11px; border:1px solid var(--line); border-radius:100px;">Dashboards</span>
+          </div>
+        </article>
+
+        <!-- Chola intern -->
+        <article style="padding:36px 0; border-top:1px solid var(--line);">
+          <div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:8px;">
+            <div>
+              <h3 style="margin:0; font-size:22px; font-weight:700;">Software Engineer Intern</h3>
+              <div style="margin-top:4px; color:var(--accent); font-weight:600; font-size:15px;">Chola Finance</div>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted);">Jan 2024 — Jun 2024</div>
+          </div>
+          <ul style="list-style:none; margin:18px 0 0; padding:0; display:flex; flex-direction:column; gap:13px; max-width:760px;">
+            <li style="display:flex; gap:14px; color:var(--muted); font-size:15.5px; line-height:1.55;"><span aria-hidden="true" style="display:inline-block; margin-top:11px; width:14px; height:1.5px; background:var(--accent-dim); flex:none;"></span><span>Built the <strong style="color:var(--fg); font-weight:600;">Met-X chatbot</strong> (React) — cutting inquiry handling time by <strong style="color:var(--fg); font-weight:600;">75%</strong> across the Metrix MIS ecosystem.</span></li>
+            <li style="display:flex; gap:14px; color:var(--muted); font-size:15.5px; line-height:1.55;"><span aria-hidden="true" style="display:inline-block; margin-top:11px; width:14px; height:1.5px; background:var(--accent-dim); flex:none;"></span><span>Engineered the <strong style="color:var(--fg); font-weight:600;">Bridge</strong> communication platform (Next.js), integrating multiple internal channels.</span></li>
+            <li style="display:flex; gap:14px; color:var(--muted); font-size:15.5px; line-height:1.55;"><span aria-hidden="true" style="display:inline-block; margin-top:11px; width:14px; height:1.5px; background:var(--accent-dim); flex:none;"></span><span>Shipped user-input flows for <strong style="color:var(--fg); font-weight:600;">Revenue Radar</strong>, letting executives simulate financial scenarios in strategic planning.</span></li>
+            <li style="display:flex; gap:14px; color:var(--muted); font-size:15.5px; line-height:1.55;"><span aria-hidden="true" style="display:inline-block; margin-top:11px; width:14px; height:1.5px; background:var(--accent-dim); flex:none;"></span><span>Wrote SQL in pgAdmin powering Home Loans &amp; Collections dashboards for real-time tracking.</span></li>
+          </ul>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:22px;">
+            <span class="chip" style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:5px 11px; border:1px solid var(--line); border-radius:100px;">React.js</span>
+            <span class="chip" style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:5px 11px; border:1px solid var(--line); border-radius:100px;">Next.js</span>
+            <span class="chip" style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:5px 11px; border:1px solid var(--line); border-radius:100px;">SQL · pgAdmin</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" data-reveal style="max-width:1120px; margin:0 auto; padding:80px 32px; scroll-margin-top:72px;">
+      <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:56px;">
+        <span aria-hidden="true" style="font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--accent); letter-spacing:0.06em;">02</span>
+        <h2 style="margin:0; font-size:30px; font-weight:700; letter-spacing:-0.02em;">Projects</h2>
+        <span aria-hidden="true" style="flex:1; height:1px; background:var(--line); display:inline-block;"></span>
+      </div>
+      <div class="two-col" style="display:grid; grid-template-columns:1fr 1fr; gap:22px;">
+        <article class="project-card" style="padding:30px; border:1px solid var(--line); border-radius:18px; background:var(--surface);">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--accent); letter-spacing:0.04em;">SECURITY · CLI</span>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--faint);">Jul — Dec 2022</span>
+          </div>
+          <h3 style="margin:16px 0 0; font-size:21px; font-weight:700; line-height:1.2;">Antivirus &amp; Fork-Bomb Scanner</h3>
+          <p style="margin:12px 0 0; color:var(--muted); font-size:15px; line-height:1.55;">A CLI tool that detects and prevents fork-bomb attacks and runs system-wide security scans — reaching <strong style="color:var(--fg); font-weight:600;">95% threat mitigation</strong>.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:20px;">
+            <span class="chip" style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:5px 11px; border:1px solid var(--line); border-radius:100px;">Kali Linux</span>
+            <span class="chip" style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:5px 11px; border:1px solid var(--line); border-radius:100px;">Python</span>
+            <span class="chip" style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:5px 11px; border:1px solid var(--line); border-radius:100px;">C++</span>
+          </div>
+        </article>
+        <article class="project-card" style="padding:30px; border:1px solid var(--line); border-radius:18px; background:var(--surface);">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--accent); letter-spacing:0.04em;">FULL-STACK · IOT</span>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--faint);">Jan — Apr 2023</span>
+          </div>
+          <h3 style="margin:16px 0 0; font-size:21px; font-weight:700; line-height:1.2;">E-Juice EV Charging System</h3>
+          <p style="margin:12px 0 0; color:var(--muted); font-size:15px; line-height:1.55;">Designed and prototyped an EV charging platform with <strong style="color:var(--fg); font-weight:600;">RazorPay</strong> integration for secure payments and a smoother charging experience.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:20px;">
+            <span class="chip" style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:5px 11px; border:1px solid var(--line); border-radius:100px;">MongoDB</span>
+            <span class="chip" style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:5px 11px; border:1px solid var(--line); border-radius:100px;">Express</span>
+            <span class="chip" style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:5px 11px; border:1px solid var(--line); border-radius:100px;">React</span>
+            <span class="chip" style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:5px 11px; border:1px solid var(--line); border-radius:100px;">Node</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" data-reveal style="max-width:1120px; margin:0 auto; padding:80px 32px; scroll-margin-top:72px;">
+      <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:56px;">
+        <span aria-hidden="true" style="font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--accent); letter-spacing:0.06em;">03</span>
+        <h2 style="margin:0; font-size:30px; font-weight:700; letter-spacing:-0.02em;">Skills &amp; Stack</h2>
+        <span aria-hidden="true" style="flex:1; height:1px; background:var(--line); display:inline-block;"></span>
+      </div>
+      <div class="skills-grid" style="display:grid; grid-template-columns:repeat(2,1fr); gap:36px 56px;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--accent); letter-spacing:0.06em; margin-bottom:16px;">// LANGUAGES</div>
+          <div style="display:flex; flex-wrap:wrap; gap:9px;">
+            <span class="chip" style="font-size:14px; color:var(--fg); padding:8px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface);">C++</span>
+            <span class="chip" style="font-size:14px; color:var(--fg); padding:8px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface);">Python</span>
+            <span class="chip" style="font-size:14px; color:var(--fg); padding:8px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface);">JavaScript</span>
+            <span class="chip" style="font-size:14px; color:var(--fg); padding:8px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface);">TypeScript</span>
+            <span class="chip" style="font-size:14px; color:var(--fg); padding:8px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface);">Dart · Flutter</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--accent); letter-spacing:0.06em; margin-bottom:16px;">// FRAMEWORKS</div>
+          <div style="display:flex; flex-wrap:wrap; gap:9px;">
+            <span class="chip" style="font-size:14px; color:var(--fg); padding:8px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface);">React.js</span>
+            <span class="chip" style="font-size:14px; color:var(--fg); padding:8px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface);">Next.js</span>
+            <span class="chip" style="font-size:14px; color:var(--fg); padding:8px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface);">Node.js</span>
+            <span class="chip" style="font-size:14px; color:var(--fg); padding:8px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface);">Express.js</span>
+            <span class="chip" style="font-size:14px; color:var(--fg); padding:8px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface);">REST APIs</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--accent); letter-spacing:0.06em; margin-bottom:16px;">// DATA &amp; CLOUD</div>
+          <div style="display:flex; flex-wrap:wrap; gap:9px;">
+            <span class="chip" style="font-size:14px; color:var(--fg); padding:8px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface);">MongoDB</span>
+            <span class="chip" style="font-size:14px; color:var(--fg); padding:8px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface);">PostgreSQL</span>
+            <span class="chip" style="font-size:14px; color:var(--fg); padding:8px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface);">AWS · S3 · CloudWatch</span>
+            <span class="chip" style="font-size:14px; color:var(--fg); padding:8px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface);">Git</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--accent); letter-spacing:0.06em; margin-bottom:16px;">// TOOLS &amp; PLATFORMS</div>
+          <div style="display:flex; flex-wrap:wrap; gap:9px;">
+            <span class="chip" style="font-size:14px; color:var(--fg); padding:8px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface);">Strapi</span>
+            <span class="chip" style="font-size:14px; color:var(--fg); padding:8px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface);">Flagsmith</span>
+            <span class="chip" style="font-size:14px; color:var(--fg); padding:8px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface);">Appsmith</span>
+            <span class="chip" style="font-size:14px; color:var(--fg); padding:8px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface);">CleverTap</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CREDENTIALS -->
+    <section data-reveal style="max-width:1120px; margin:0 auto; padding:80px 32px; scroll-margin-top:72px;">
+      <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:56px;">
+        <span aria-hidden="true" style="font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--accent); letter-spacing:0.06em;">04</span>
+        <h2 style="margin:0; font-size:30px; font-weight:700; letter-spacing:-0.02em;">Credentials</h2>
+        <span aria-hidden="true" style="flex:1; height:1px; background:var(--line); display:inline-block;"></span>
+      </div>
+      <div class="two-col" style="display:grid; grid-template-columns:1.2fr 1fr; gap:48px;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--faint); letter-spacing:0.06em; margin-bottom:22px;">CERTIFICATIONS</div>
+          <div style="display:flex; flex-direction:column; gap:18px;">
+            <div style="padding:22px; border:1px solid var(--line); border-radius:16px; background:var(--surface);">
+              <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px;">
+                <h3 style="margin:0; font-size:17px; font-weight:700;">Google Cybersecurity Professional</h3>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--faint); flex:none;">Jul 2024</span>
+              </div>
+              <p style="margin:10px 0 0; font-size:14px; color:var(--muted); line-height:1.55;">SIEM tooling, threat &amp; vulnerability analysis, incident response, security hardening, Python &amp; SQL.</p>
+            </div>
+            <div style="padding:22px; border:1px solid var(--line); border-radius:16px; background:var(--surface);">
+              <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px;">
+                <h3 style="margin:0; font-size:17px; font-weight:700;">Microsoft SC-900</h3>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--faint); flex:none;">Jul 2023</span>
+              </div>
+              <p style="margin:10px 0 0; font-size:14px; color:var(--muted); line-height:1.55;">Security, compliance &amp; identity fundamentals — Azure Active Directory and Microsoft security solutions.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--faint); letter-spacing:0.06em; margin-bottom:22px;">EDUCATION &amp; LEADERSHIP</div>
+          <div style="display:flex; flex-direction:column; gap:18px;">
+            <div style="padding:22px; border:1px solid var(--line); border-radius:16px; background:var(--surface);">
+              <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px;">
+                <h3 style="margin:0; font-size:17px; font-weight:700;">B.Tech, CSE — Bioinformatics</h3>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--accent); flex:none;">8.36 CGPA</span>
+              </div>
+              <p style="margin:8px 0 0; font-size:14px; color:var(--muted);">Vellore Institute of Technology · 2020 — 2024</p>
+            </div>
+            <div style="padding:22px; border:1px solid var(--line); border-radius:16px; background:var(--surface);">
+              <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px;">
+                <h3 style="margin:0; font-size:17px; font-weight:700;">Design Head — VITLUG</h3>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--faint); flex:none;">2022 — 2023</span>
+              </div>
+              <p style="margin:10px 0 0; font-size:14px; color:var(--muted); line-height:1.55;">Led visual identity for the Linux User's Group, designed social campaigns and mentored 3 junior designers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CONTACT / FOOTER -->
+  <footer id="contact" data-reveal style="border-top:1px solid var(--line); margin-top:40px;">
+    <div style="max-width:1120px; margin:0 auto; padding:96px 32px 72px; scroll-margin-top:72px;">
+      <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--accent); letter-spacing:0.06em;">05 / let's talk</span>
+      <h2 style="margin:20px 0 0; font-size:clamp(40px,6vw,68px); font-weight:800; letter-spacing:-0.035em; line-height:1;">Building something<br>worth shipping?</h2>
+      <p style="margin:22px 0 0; max-width:480px; font-size:18px; color:var(--muted); line-height:1.6;">I'm always up for a conversation about fintech, platform engineering, or a side project. The fastest way to reach me is below.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:36px;">
+        <button type="button" onclick="copyEmail()" class="btn-accent" aria-label="Copy email address to clipboard" style="display:inline-flex; align-items:center; gap:10px; padding:14px 22px; border-radius:12px; border:none; background:var(--accent); color:#221a0c; font-family:'JetBrains Mono',monospace; font-size:14px; font-weight:600; cursor:pointer;">
+          <span aria-hidden="true">✦</span> shivangkher@gmail.com
+        </button>
+        <a href="tel:+919840266626" class="btn-outline" style="display:inline-flex; align-items:center; gap:8px; padding:14px 22px; border-radius:12px; border:1px solid var(--line); background:var(--surface); color:var(--fg); text-decoration:none; font-family:'JetBrains Mono',monospace; font-size:14px;">+91 98402 66626</a>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:20px; margin-top:30px; font-family:'JetBrains Mono',monospace; font-size:13px;">
+        <a href="https://linkedin.com/in/shivang-kher-746761218" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in new tab)" class="footer-link" style="color:var(--muted); text-decoration:none;">LinkedIn ↗</a>
+        <a href="https://github.com/Shivang-Kher" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in new tab)" class="footer-link" style="color:var(--muted); text-decoration:none;">GitHub ↗</a>
+        <a href="https://shivangkher.netlify.app" target="_blank" rel="noopener noreferrer" aria-label="Portfolio site (opens in new tab)" class="footer-link" style="color:var(--muted); text-decoration:none;">shivangkher.netlify.app ↗</a>
+      </div>
+      <div style="margin-top:72px; padding-top:28px; border-top:1px solid var(--line); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--faint);">
+        <span>&copy; 2026 Shivang Kher</span>
+        <span>Chennai, IN &middot; <span id="clock-footer" aria-hidden="true"></span> IST</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Copy toast — animated via class toggle so it re-triggers on every click -->
+  <div id="toast" role="status" aria-live="polite" aria-label="Email copied notification">
+    ✓ Email copied to clipboard
+  </div>
+
+  <script>
+    // IST clock
+    (function () {
+      function tick() {
+        try {
+          var t = new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+          var c = document.getElementById('clock');
+          var cf = document.getElementById('clock-footer');
+          if (c)  c.textContent  = t;
+          if (cf) cf.textContent = t;
+        } catch (e) {}
+      }
+      tick();
+      setInterval(tick, 1000);
+    })();
+
+    // Copy email — class-toggled animation so it re-triggers on each click
+    var _toastTimer;
+    function copyEmail() {
+      try { navigator.clipboard && navigator.clipboard.writeText('shivangkher@gmail.com'); } catch (e) {}
+      var toast = document.getElementById('toast');
+      toast.classList.remove('show');
+      void toast.offsetWidth; // force reflow to restart animation
+      toast.classList.add('show');
+      clearTimeout(_toastTimer);
+      _toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 1800);
+    }
+
+    // Mobile menu toggle
+    var menuBtn  = document.getElementById('menu-btn');
+    var mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', function () {
+      var isOpen = mobileMenu.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+    // Close menu on outside click
+    document.addEventListener('click', function (e) {
+      if (!menuBtn.contains(e.target) && !mobileMenu.contains(e.target)) closeMenu();
+    });
+
+    // Scroll-reveal fallback (IntersectionObserver) for browsers without animation-timeline
+    (function () {
+      var hasTimeline = false;
+      try { hasTimeline = CSS.supports('animation-timeline', 'view()'); } catch (e) {}
+      if (hasTimeline) return;
+      if (!('IntersectionObserver' in window)) {
+        // Very old browser — just show everything
+        document.querySelectorAll('[data-reveal]').forEach(function (el) { el.classList.add('revealed'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.05 });
+      document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
 </html>
-
-
