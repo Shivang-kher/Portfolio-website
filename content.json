@@ -85,6 +85,12 @@
         "Next.js",
         "SQL · pgAdmin"
       ]
+    },
+    {
+      "active": false,
+      "role": "TEST DEVELOPER",
+      "company": "TEST COMPANY",
+      "period": "May 2025 – Present"
     }
   ],
   "projects": [
