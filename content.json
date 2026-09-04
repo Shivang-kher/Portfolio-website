@@ -9,10 +9,26 @@
     "github_url": "https://github.com/Shivang-Kher"
   },
   "metrics": [
-    { "number": "1,000", "suffix": "+", "label": "partners on integrations" },
-    { "number": "30",    "suffix": "%", "label": "lift in activation" },
-    { "number": "300",   "suffix": "+", "label": "demos booked / month" },
-    { "number": "14",    "suffix": "",  "label": "languages shipped" }
+    {
+      "number": "1,000",
+      "suffix": "+",
+      "label": "partners on integrations"
+    },
+    {
+      "number": "30",
+      "suffix": "%",
+      "label": "lift in activation"
+    },
+    {
+      "number": "300",
+      "suffix": "+",
+      "label": "demos booked / month"
+    },
+    {
+      "number": "14",
+      "suffix": " ",
+      "label": "languages shipped"
+    }
   ],
   "experience": [
     {
@@ -27,7 +43,13 @@
         "Leading the <strong>Empanelment Revamp</strong> — redesigning onboarding workflows, verification states, and compliance flows for <strong>400+ partners / month</strong>, collaborating cross-functionally with Product, Design, RM, and Operations.",
         "Built and deployed <strong>Schedule a Demo</strong>, enabling MFD partners to book RM walkthroughs, driving <strong>300+ bookings / month</strong>."
       ],
-      "chips": ["CleverTap", "iOS · Android", "Appsmith", "PMS", "Onboarding"]
+      "chips": [
+        "CleverTap",
+        "iOS · Android",
+        "Appsmith",
+        "PMS",
+        "Onboarding"
+      ]
     },
     {
       "role": "Software Engineer",
@@ -40,7 +62,12 @@
         "<strong>Capacity Planning Dashboard</strong> — multi-level analytics with drill-down into stage-wise case details for smarter workload distribution.",
         "<strong>Multilingual KFS</strong> — JSON-driven Key Fact Statements rendered dynamically in <strong>14 languages</strong>."
       ],
-      "chips": ["Node.js · Express", "React", "OCR", "Dashboards"]
+      "chips": [
+        "Node.js · Express",
+        "React",
+        "OCR",
+        "Dashboards"
+      ]
     },
     {
       "role": "Software Engineer Intern",
@@ -53,7 +80,17 @@
         "Shipped user-input flows for <strong>Revenue Radar</strong>, letting executives simulate financial scenarios in strategic planning.",
         "Wrote SQL in pgAdmin powering Home Loans &amp; Collections dashboards for real-time tracking."
       ],
-      "chips": ["React.js", "Next.js", "SQL · pgAdmin"]
+      "chips": [
+        "React.js",
+        "Next.js",
+        "SQL · pgAdmin"
+      ]
+    },
+    {
+      "active": false,
+      "role": "Test",
+      "company": "Test",
+      "period": "May 2025 – Present"
     }
   ],
   "projects": [
@@ -61,14 +98,21 @@
       "eyebrow": "Security · CLI · Jul – Dec 2022",
       "title": "Antivirus &amp; Fork-Bomb Scanner.",
       "desc": "A CLI tool that detects and prevents fork-bomb attacks and runs system-wide security scans, reaching <strong>95% threat mitigation</strong>.",
-      "chips": ["Kali Linux", "Python", "C++"],
+      "chips": [
+        "Kali Linux",
+        "Python",
+        "C++"
+      ],
       "icon": "shield"
     },
     {
       "eyebrow": "Full-stack · IoT · Jan – Apr 2023",
       "title": "E-Juice EV Charging System.",
       "desc": "EV charging platform with <strong>RazorPay</strong> integration for secure payments and a smoother charging experience.",
-      "chips": ["MongoDB", "Express · React · Node"],
+      "chips": [
+        "MongoDB",
+        "Express · React · Node"
+      ],
       "icon": "bolt"
     }
   ],
