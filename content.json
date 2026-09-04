@@ -1,0 +1,79 @@
+{
+  "hero": {
+    "status_pill": "Building partner growth at AssetPlus",
+    "name": "Shivang Kher.",
+    "intro": "Software engineer shipping fintech platform features used by <strong style=\"color:var(--ink);font-weight:600;\">thousands of MFD partners</strong> — onboarding flows, integrations, and dashboards that move real numbers.",
+    "email": "shivangkher@gmail.com",
+    "location": "Chennai, India",
+    "linkedin_url": "https://linkedin.com/in/shivang-kher-746761218",
+    "github_url": "https://github.com/Shivang-Kher"
+  },
+  "metrics": [
+    { "number": "1,000", "suffix": "+", "label": "partners on integrations" },
+    { "number": "30",    "suffix": "%", "label": "lift in activation" },
+    { "number": "300",   "suffix": "+", "label": "demos booked / month" },
+    { "number": "14",    "suffix": "",  "label": "languages shipped" }
+  ],
+  "experience": [
+    {
+      "role": "Software Engineer — 1",
+      "company": "AssetPlus",
+      "period": "May 2025 – Present",
+      "active": true,
+      "bullets": [
+        "Owned CleverTap integration across iOS &amp; Android, redesigning the event-tracking architecture for reliable push notification analytics and accurate user-event attribution across <strong>1,000+ partners</strong>.",
+        "Led end-to-end development of <strong>Portfolio Management Services (PMS)</strong> across web and backend; built Appsmith dashboards for scheme onboarding and operational monitoring — onboarded <strong>50+ clients</strong> within the first month.",
+        "Implemented <strong>ZeroBoard</strong> and enhanced Partner Initiated Client Activation (PICA) with guided onboarding, automated data fetches, and validations, increasing partner activation by <strong>30%</strong>.",
+        "Leading the <strong>Empanelment Revamp</strong> — redesigning onboarding workflows, verification states, and compliance flows for <strong>400+ partners / month</strong>, collaborating cross-functionally with Product, Design, RM, and Operations.",
+        "Built and deployed <strong>Schedule a Demo</strong>, enabling MFD partners to book RM walkthroughs, driving <strong>300+ bookings / month</strong>."
+      ],
+      "chips": ["CleverTap", "iOS · Android", "Appsmith", "PMS", "Onboarding"]
+    },
+    {
+      "role": "Software Engineer",
+      "company": "Chola Finance",
+      "period": "Aug 2024 – Apr 2025",
+      "active": false,
+      "bullets": [
+        "<strong>Productivity Report Module</strong> — Node/Express APIs + React dashboard tracking credit-team case count, idle &amp; active time for real-time performance insights.",
+        "<strong>Automated Case Reporting</strong> — OCR extraction from post-disbursement docs (RC, invoices, insurance) plus audit &amp; stage APIs for fast-track cases.",
+        "<strong>Capacity Planning Dashboard</strong> — multi-level analytics with drill-down into stage-wise case details for smarter workload distribution.",
+        "<strong>Multilingual KFS</strong> — JSON-driven Key Fact Statements rendered dynamically in <strong>14 languages</strong>."
+      ],
+      "chips": ["Node.js · Express", "React", "OCR", "Dashboards"]
+    },
+    {
+      "role": "Software Engineer Intern",
+      "company": "Chola Finance",
+      "period": "Jan 2024 – Jun 2024",
+      "active": false,
+      "bullets": [
+        "Built the <strong>Met-X chatbot</strong> (React), cutting inquiry handling time by <strong>75%</strong> across the Metrix MIS ecosystem.",
+        "Engineered the <strong>Bridge</strong> communication platform (Next.js), integrating multiple internal channels.",
+        "Shipped user-input flows for <strong>Revenue Radar</strong>, letting executives simulate financial scenarios in strategic planning.",
+        "Wrote SQL in pgAdmin powering Home Loans &amp; Collections dashboards for real-time tracking."
+      ],
+      "chips": ["React.js", "Next.js", "SQL · pgAdmin"]
+    }
+  ],
+  "projects": [
+    {
+      "eyebrow": "Security · CLI · Jul – Dec 2022",
+      "title": "Antivirus &amp; Fork-Bomb Scanner.",
+      "desc": "A CLI tool that detects and prevents fork-bomb attacks and runs system-wide security scans, reaching <strong>95% threat mitigation</strong>.",
+      "chips": ["Kali Linux", "Python", "C++"],
+      "icon": "shield"
+    },
+    {
+      "eyebrow": "Full-stack · IoT · Jan – Apr 2023",
+      "title": "E-Juice EV Charging System.",
+      "desc": "EV charging platform with <strong>RazorPay</strong> integration for secure payments and a smoother charging experience.",
+      "chips": ["MongoDB", "Express · React · Node"],
+      "icon": "bolt"
+    }
+  ],
+  "contact": {
+    "headline": "Building something worth shipping?",
+    "sub": "Open to conversations about fintech, platform engineering, or a side project."
+  }
+}

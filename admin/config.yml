@@ -1,0 +1,100 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Decap CMS stores content.json in the repo root
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "portfolio"
+    label: "Portfolio"
+    files:
+      - name: "content"
+        label: "Portfolio Content"
+        file: "content.json"
+        format: json
+        fields:
+
+          # ── Hero ──────────────────────────────────────────
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Status Pill Text",  name: "status_pill",  widget: "string",
+                  hint: "Short status shown at top of the page, e.g. 'Building partner growth at AssetPlus'" }
+              - { label: "Name",              name: "name",         widget: "string" }
+              - { label: "Intro Paragraph",   name: "intro",        widget: "text",
+                  hint: "HTML allowed — use <strong>text</strong> for bold" }
+              - { label: "Email",             name: "email",        widget: "string" }
+              - { label: "Location",          name: "location",     widget: "string" }
+              - { label: "LinkedIn URL",      name: "linkedin_url", widget: "string" }
+              - { label: "GitHub URL",        name: "github_url",   widget: "string" }
+
+          # ── Metrics strip ─────────────────────────────────
+          - label: "Metrics"
+            name: "metrics"
+            widget: "list"
+            fields:
+              - { label: "Number",  name: "number", widget: "string", hint: "e.g. 1,000 or 30" }
+              - { label: "Suffix",  name: "suffix", widget: "string", hint: "e.g. + or % (leave blank if none)" }
+              - { label: "Label",   name: "label",  widget: "string", hint: "e.g. partners on integrations" }
+
+          # ── Experience ────────────────────────────────────
+          - label: "Experience"
+            name: "experience"
+            widget: "list"
+            fields:
+              - { label: "Role",       name: "role",    widget: "string" }
+              - { label: "Company",    name: "company", widget: "string",
+                  hint: "Must be exactly 'AssetPlus' or 'Chola Finance' to show the correct company logo" }
+              - { label: "Period",     name: "period",  widget: "string", hint: "e.g. May 2025 – Present" }
+              - { label: "Active",     name: "active",  widget: "boolean", default: false,
+                  hint: "Shows a green dot next to the period if enabled" }
+              - label: "Bullets"
+                name: "bullets"
+                widget: "list"
+                field:
+                  label: "Bullet"
+                  name: "bullet"
+                  widget: "string"
+                  hint: "HTML allowed — use <strong>text</strong> for bold. Use &amp; instead of & in text."
+              - label: "Tech Chips"
+                name: "chips"
+                widget: "list"
+                field:
+                  label: "Chip"
+                  name: "chip"
+                  widget: "string"
+
+          # ── Projects ──────────────────────────────────────
+          - label: "Projects"
+            name: "projects"
+            widget: "list"
+            fields:
+              - { label: "Eyebrow",     name: "eyebrow", widget: "string",
+                  hint: "e.g. Security · CLI · Jul – Dec 2022" }
+              - { label: "Title",       name: "title",   widget: "string",
+                  hint: "Include the period at the end, e.g. My Project." }
+              - { label: "Description", name: "desc",    widget: "text",
+                  hint: "HTML allowed — use <strong>text</strong> for bold" }
+              - label: "Tech Chips"
+                name: "chips"
+                widget: "list"
+                field:
+                  label: "Chip"
+                  name: "chip"
+                  widget: "string"
+              - label: "Icon"
+                name: "icon"
+                widget: "select"
+                options: ["shield", "bolt"]
+                hint: "Pick an icon for this project card"
+
+          # ── Contact ───────────────────────────────────────
+          - label: "Contact"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Headline", name: "headline", widget: "string" }
+              - { label: "Subtext",  name: "sub",      widget: "string" }
