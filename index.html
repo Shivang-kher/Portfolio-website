@@ -936,7 +936,7 @@
         setText('contact-sub',      c.sub);
       }
 
-      fetch('/content.json')
+      fetch('/content.json', { cache: 'no-cache' })
         .then(function(r) { return r.json(); })
         .then(function(data) {
           window.CONTENT = data;
