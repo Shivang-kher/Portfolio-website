@@ -178,11 +178,13 @@
       display: grid; grid-template-columns: 240px 1fr;
       gap: 40px; padding: 36px 0; border-top: 1px solid var(--hairline);
     }
-    .exp-company-mark {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 34px; height: 34px; border-radius: 8px;
-      font-size: 11px; font-weight: 600; font-family: 'Geist Mono', monospace;
-      flex: none; color: #fff; margin-bottom: 10px;
+    .exp-company-logo {
+      display: block; height: 32px; width: auto; max-width: 120px;
+      margin-bottom: 12px; border-radius: 7px; object-fit: contain;
+    }
+    .exp-company-logo-svg {
+      display: block; height: 36px; width: 36px;
+      margin-bottom: 12px;
     }
     .exp-role { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
     .exp-company { font-size: 13px; color: var(--body); margin-bottom: 10px; }
@@ -409,7 +411,7 @@
         <!-- AssetPlus -->
         <div class="exp-row">
           <div class="exp-meta">
-            <div class="exp-company-mark" style="background:#16a34a;">AP</div>
+            <img class="exp-company-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAAB3RJTUUH4AocAR4xDrIUdgAAB4VJREFUWMPFl1lsnNUVx3/33m+f8YztibFJ7DgLBGchiQKBbIgmldINKBItdKFVK1VVX/ravvSNF/rQIvGARKVWrUpbyvIEQQWVFoXWrYCGNXHJViB27Ew84/Fs3zLz3duHGYyHOKUKor3SPMz5vnv/557/Of9zPnHdzYdJwmbBDbL3CKn2CyFcPsFljImNTv8aN+u/d/ygZCVhc9Dv6/+xVNY3AOeTBP9g2V+SytoV1io/sNwg+xWp1L3/O3AAHKnUvW6QPWYJqfbBxwm7AQRCKqRUIETHqjVGpxijL7NPuEKqfZYQwrtSaCkVtpfB9jJYtoOQCiEEpuMBut2mlUS0ojqtJAJjel0QwrOuFNx2A4J8AcvxAdGNRPdgABRSOVhugJfJE4dVwmoZnbZ7L3El4JbjkR0YxnKCZTRcjh6DkBIv00+QX4XoUrR01orbOjHseVlrjTEdm+NnkZbzgU0K5FLoTTcr6NDR/Q9guRmk5ZC24ss7YIzB91wspag1mgghEAKuWT/GmpGrmJktUqwmCGFYPzrEyKoBZotlzl0o4dkW+b6gA6wNlXqTXNbHsSy0MQjgfFKhNB8tJeuKEfjWPV9k9cgQ9/30YaK4xaEDu/nm3XcwXyrjOA4P/uIxNk+s557bD1GqVHEsi4d+e4Q9Oya48/A+qvUGrVabx585ysG9O1m3Zphsxqe8sMizfzrKrx57CrFSBLTWbBwf5eCBmwh8j13Xb+bFl15l57YJZmYv8JOHfomQkjiV3PX51czMzfPwo88gpaLWjBgq5Dlx8h1+9/QLGGB+oc7U2Rm2bxrny5/bx30P/Jy54jzLs0ANrd10t5Byy/uGb3/1TmYvXOTY6ye4Ze8NHJ38B6WFCntv3MlnDx1gqDDIexfKzFdDdm+7hoN7dlDoz3H6nWk2bxjllpuu57r1o4yvHuKVN04wNztL4MANO7Zy5OirLJRLS9pgjJ6ylt/+2vVjfObgAd4+dZZVgwPsvXEnN+7YwkuvvcWP7n+QsdUjfP87X0NZNr95+kXu/9njDA9k+d7X7+Dwns0kYZ033priiaeeI4wS5uem0UZguz5SKdJWhPlQGS45IATcfvhTvDd9nuNvn+mERyluO3wrmzasZcO6MaZOnsX3XMrlMl+4ZTtbtmzl9Dsz+EFArC2yjs/a0dXcuv9mpLLIvnKCN09NY7k+7SQhbbe6VRCt5IDk78fe4Mkjf+Tsu9MIIRkZGWb71s0Uy1UKw6Nsu347L7w8xbOTr1PIZ8jn+rh6MMtTf3ieF16eYu2aEZphhJQCnTapLVYIFy/yz+M1HrUAOwBT6YmA2LL/tieksu56nwaEwHF9vOwAlusDEiE7ZSVERyOUkmitabdikrBGVF9EYECobs13lEBZFo7rY3sZpHJImovEjUW0Tju0p+0ne6pASonjZcgMDKOkAqOXVM4oiTAGI5e96/q4jovjZWiU57BsBz9X6PQEQEgFQNpOCKvzSKk6ApaEKwuRlKpzgLIpDm2kkRtGGE1u4Rz95XNUcyM4cR0vqQOCxHJp9F1Ff2UaL5OjYgW081cTVIuUxndRK6xDVmbJn3iePtvG9rIk5dkeCnp6gVAKZdmkUjG96VaqhXHCTIEzO+6gNDjOzIY9LA6MIYxBGE0jO8S7E58mlTZK2VTW7WLm6q3M9I0ws2437oVTEOSx10zgBTniZvWSjtjjgE5T2q24o+RGs+bUX5g49gSZhXPUCmMYITrl0j3DCImRCoOhnYQYJHaQw88PIWwXH83omUmCuZPUFooIKZGWzfLm1UOBEBDXF7GUA1Ixt243C8PX0hgYozBznDB71fsdo+OkAIMhri+ikwghINWa3NmXCKMmM2PbObdhL4U3n2V18STKcYkbVVimhb0USIXlejQX52m3E1JApG3Gjz9HYf5fGClp2R6RkyFWDjQqtISk6vVBbhXx4CiiUaaeaoLZt9k4+WtyF09T33YI6QY0F0uXzAO9vSBtI5VNJpfFa1YYeO0I+eJppOMRKQvqC0xv3M/c2l04lVlGJh+h//wU5z/1XUTSxCQRG87+jfDaPUxPHMSJaiS2T/+JP9OYnyb9EPglOiCVheV4uJk8um8VMqyhwxrtdoJJ2yR+njQzgLBsHCAbVzFCUlIeLWljF8+QwYDlUAsGCL0+7HoJv3wOYXRP6FfUASEkjp8lrJaxmjVUkMPJ5PCE7E5dBnQESYROU1pJSNyskVUKZTk0wipxN0ec6kVcY0AIjJCXgK9IQZq2wEB2YJiovkBjsQgIpOpOvAiM0WidYtIUISVukMPxszQqxeVX6QLzkat3IDGGZnWeILeKoH8IozXtJCJtJ0vJI4XCVgHKdrFsF2M0zWqJJKx/NNpHOtBNxEblAnFYw/X7sFwP2w2WRijozPw6TQjrCyRhjbSVXBE4gGWMiT5sNMZ0ZvmogZQKoSyklEsUGJ2i0//00fHfLWNMJI1OJ8HElz7u3FjrlLQV04qbtOIG7SQkbbc+NjiY2Oh0UvUNjpyxbHdYSLkNUJffIJb9PvZKdJo+EjWqD1iOH5TDWuWHbpA99n/4PC//GyLoUIbSExsgAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE2LTEwLTI4VDAxOjMwOjQ5KzAyOjAwNW8NpwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNi0xMC0yOFQwMTozMDo0OSswMjowMEQytRsAAAAASUVORK5CYII=" alt="AssetPlus logo" width="32" height="32" style="border-radius:8px;">
             <p class="exp-role">Software Engineer — 1</p>
             <p class="exp-company">AssetPlus</p>
             <span class="exp-date"><span class="exp-active-dot"></span>May 2025 – Present</span>
@@ -432,7 +434,16 @@
         <!-- Chola full-time -->
         <div class="exp-row">
           <div class="exp-meta">
-            <div class="exp-company-mark" style="background:#c2410c;">CF</div>
+            <svg class="exp-company-logo-svg" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" fill-rule="nonzero" aria-label="Cholamandalam logo">
+              <path d="M17.4,23 C15.5,22.2 14.1,21.2 14.4,18.5 C14.8,14.9 20.5,10.8 22.3,8.7 C23.6,7.3 23.9,3.7 23.9,3.7 C23.9,3.7 25.8,7.6 23.6,10.9 C22.7,12.2 18.2,16.6 17.2,19.4 C16.8,20.5 16.6,21.8 17.4,23" fill="#E7262B"/>
+              <path d="M14.1,19.6 C12.2,18.8 10.7,17.5 11,14.8 C11.5,11.2 17.2,7.2 19.1,5.2 C20.4,3.8 20.8,0.3 20.8,0.3 C20.8,0.3 22.6,4.3 20.4,7.5 C19.5,8.8 14.9,13.1 13.9,15.9 C13.5,16.9 13.2,18.2 14.1,19.6" fill="#E7262B"/>
+              <path d="M26.6,20.1 C28.5,20.9 29.9,21.9 29.6,24.6 C29.2,28.2 23.5,32.3 21.7,34.4 C20.4,35.8 20.1,39.4 20.1,39.4 C20.1,39.4 18.2,35.5 20.4,32.2 C21.3,30.9 25.8,26.5 26.8,23.7 C27.2,22.6 27.4,21.3 26.6,20.1" fill="#E7262B"/>
+              <path d="M29.9,23.5 C31.8,24.3 33.3,25.6 33,28.3 C32.5,31.9 26.8,35.9 24.9,37.9 C23.6,39.3 23.2,42.8 23.2,42.8 C23.2,42.8 21.4,38.8 23.6,35.6 C24.5,34.3 29.1,30 30.1,27.2 C30.5,26.2 30.8,24.9 29.9,23.5" fill="#E7262B"/>
+              <path d="M23.5,26.2 C22.7,28.1 21.7,29.5 19,29.2 C15.4,28.8 11.3,23.1 9.2,21.3 C7.8,20 4.2,19.7 4.2,19.7 C4.2,19.7 8.1,17.8 11.4,20 C12.7,20.9 17.1,25.4 19.9,26.4 C20.9,26.7 22.3,26.9 23.5,26.2" fill="#1D4481"/>
+              <path d="M20.1,29.4 C19.3,31.3 18,32.8 15.3,32.5 C11.7,32 7.7,26.3 5.7,24.4 C4.3,23.1 0.8,22.7 0.8,22.7 C0.8,22.7 4.8,20.9 8,23.1 C9.3,24 13.6,28.6 16.4,29.6 C17.3,30.1 18.7,30.3 20.1,29.4" fill="#1D4481"/>
+              <path d="M20.5,16.9 C21.3,15 22.3,13.6 25,13.9 C28.6,14.3 32.7,20 34.8,21.8 C36.2,23.1 39.8,23.4 39.8,23.4 C39.8,23.4 35.9,25.3 32.6,23.1 C31.3,22.2 26.9,17.7 24.1,16.7 C23.1,16.4 21.7,16.2 20.5,16.9" fill="#1D4481"/>
+              <path d="M23.9,13.7 C24.7,11.8 26,10.3 28.7,10.6 C32.3,11.1 36.3,16.8 38.3,18.7 C39.7,20 43.2,20.4 43.2,20.4 C43.2,20.4 39.2,22.2 36,20 C34.7,19.1 30.4,14.5 27.6,13.5 C26.7,13 25.3,12.8 23.9,13.7" fill="#1D4481"/>
+            </svg>
             <p class="exp-role">Software Engineer</p>
             <p class="exp-company">Chola Finance</p>
             <span class="exp-date">Aug 2024 – Apr 2025</span>
@@ -454,7 +465,16 @@
         <!-- Chola intern -->
         <div class="exp-row" style="border-bottom:1px solid var(--hairline);">
           <div class="exp-meta">
-            <div class="exp-company-mark" style="background:#c2410c;">CF</div>
+            <svg class="exp-company-logo-svg" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" fill-rule="nonzero" aria-label="Cholamandalam logo">
+              <path d="M17.4,23 C15.5,22.2 14.1,21.2 14.4,18.5 C14.8,14.9 20.5,10.8 22.3,8.7 C23.6,7.3 23.9,3.7 23.9,3.7 C23.9,3.7 25.8,7.6 23.6,10.9 C22.7,12.2 18.2,16.6 17.2,19.4 C16.8,20.5 16.6,21.8 17.4,23" fill="#E7262B"/>
+              <path d="M14.1,19.6 C12.2,18.8 10.7,17.5 11,14.8 C11.5,11.2 17.2,7.2 19.1,5.2 C20.4,3.8 20.8,0.3 20.8,0.3 C20.8,0.3 22.6,4.3 20.4,7.5 C19.5,8.8 14.9,13.1 13.9,15.9 C13.5,16.9 13.2,18.2 14.1,19.6" fill="#E7262B"/>
+              <path d="M26.6,20.1 C28.5,20.9 29.9,21.9 29.6,24.6 C29.2,28.2 23.5,32.3 21.7,34.4 C20.4,35.8 20.1,39.4 20.1,39.4 C20.1,39.4 18.2,35.5 20.4,32.2 C21.3,30.9 25.8,26.5 26.8,23.7 C27.2,22.6 27.4,21.3 26.6,20.1" fill="#E7262B"/>
+              <path d="M29.9,23.5 C31.8,24.3 33.3,25.6 33,28.3 C32.5,31.9 26.8,35.9 24.9,37.9 C23.6,39.3 23.2,42.8 23.2,42.8 C23.2,42.8 21.4,38.8 23.6,35.6 C24.5,34.3 29.1,30 30.1,27.2 C30.5,26.2 30.8,24.9 29.9,23.5" fill="#E7262B"/>
+              <path d="M23.5,26.2 C22.7,28.1 21.7,29.5 19,29.2 C15.4,28.8 11.3,23.1 9.2,21.3 C7.8,20 4.2,19.7 4.2,19.7 C4.2,19.7 8.1,17.8 11.4,20 C12.7,20.9 17.1,25.4 19.9,26.4 C20.9,26.7 22.3,26.9 23.5,26.2" fill="#1D4481"/>
+              <path d="M20.1,29.4 C19.3,31.3 18,32.8 15.3,32.5 C11.7,32 7.7,26.3 5.7,24.4 C4.3,23.1 0.8,22.7 0.8,22.7 C0.8,22.7 4.8,20.9 8,23.1 C9.3,24 13.6,28.6 16.4,29.6 C17.3,30.1 18.7,30.3 20.1,29.4" fill="#1D4481"/>
+              <path d="M20.5,16.9 C21.3,15 22.3,13.6 25,13.9 C28.6,14.3 32.7,20 34.8,21.8 C36.2,23.1 39.8,23.4 39.8,23.4 C39.8,23.4 35.9,25.3 32.6,23.1 C31.3,22.2 26.9,17.7 24.1,16.7 C23.1,16.4 21.7,16.2 20.5,16.9" fill="#1D4481"/>
+              <path d="M23.9,13.7 C24.7,11.8 26,10.3 28.7,10.6 C32.3,11.1 36.3,16.8 38.3,18.7 C39.7,20 43.2,20.4 43.2,20.4 C43.2,20.4 39.2,22.2 36,20 C34.7,19.1 30.4,14.5 27.6,13.5 C26.7,13 25.3,12.8 23.9,13.7" fill="#1D4481"/>
+            </svg>
             <p class="exp-role">Software Engineer Intern</p>
             <p class="exp-company">Chola Finance</p>
             <span class="exp-date">Jan 2024 – Jun 2024</span>
